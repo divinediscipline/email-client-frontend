@@ -1,26 +1,29 @@
 export interface User {
-  id: number;
+  id: string;
   email: string;
   name: string;
   role: string;
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface Email {
-  id: number;
+  id: string;
+  user_id: string;
   from: string;
   to: string;
   subject: string;
   body: string;
-  isRead: boolean;
-  isStarred: boolean;
-  isImportant: boolean;
+  is_read: boolean;
+  is_starred: boolean;
+  is_important: boolean;
   folder: string;
   labels: string[];
-  hasAttachment: boolean;
-  createdAt: string;
-  updatedAt: string;
+  has_attachments: boolean;
+  timestamp: string;
+  created_at: string;
+  updated_at: string;
+  attachments: unknown[];
 }
 
 export interface EmailCounts {
@@ -33,14 +36,14 @@ export interface EmailCounts {
 }
 
 export interface Label {
-  id: number;
+  id: string;
   name: string;
   color: string;
-  createdAt: string;
+  created_at: string;
 }
 
 export interface NavigationItem {
-  id: number;
+  id: string;
   name: string;
   icon: string;
   href: string;
@@ -56,21 +59,21 @@ export interface UpgradeInfo {
 }
 
 export interface Notification {
-  id: number;
+  id: string;
   title: string;
   message: string;
-  isRead: boolean;
+  is_read: boolean;
   type: string;
-  createdAt: string;
+  created_at: string;
 }
 
 export interface Message {
-  id: number;
+  id: string;
   from: string;
   subject: string;
   message: string;
-  isRead: boolean;
-  createdAt: string;
+  is_read: boolean;
+  created_at: string;
 }
 
 export interface AuthResponse {

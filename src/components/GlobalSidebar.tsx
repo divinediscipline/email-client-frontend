@@ -58,7 +58,7 @@ export default function GlobalSidebar() {
   ];
 
   return (
-    <aside className="w-64 bg-gray-50 border-r border-gray-200 h-screen overflow-y-auto">
+    <aside className="w-64 bg-gray-50 border-r border-black h-screen overflow-y-auto">
       <div className="p-4">
         {/* Top Navigation */}
         <div className="space-y-1 mb-6">
@@ -83,7 +83,11 @@ export default function GlobalSidebar() {
             <div key={section.name}>
               <button
                 onClick={() => toggleSection(section.name.toLowerCase())}
-                className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+                className={`w-full flex items-center justify-between px-3 py-2 rounded text-sm font-medium transition-colors ${
+                  section.name === 'Apps'
+                    ? 'bg-white text-black border border-black'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                }`}
               >
                 <div className="flex items-center space-x-3">
                   <section.icon className="h-4 w-4" />
@@ -101,9 +105,9 @@ export default function GlobalSidebar() {
                   {appItems.map((item) => (
                     <button
                       key={item.name}
-                      className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                      className={`w-full flex items-center space-x-3 px-3 py-2 rounded text-sm font-medium transition-colors ${
                         item.active
-                          ? 'bg-black text-white'
+                          ? 'bg-white text-black border border-black'
                           : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                       }`}
                     >
@@ -118,14 +122,14 @@ export default function GlobalSidebar() {
         </div>
 
         {/* Upgrade to Pro */}
-        <div className="border border-gray-200 rounded-lg p-4 bg-white">
+        <div className="border border-black rounded-lg p-4 bg-white">
           <h3 className="text-sm font-medium text-gray-900 mb-2">Upgrade to Pro</h3>
           <p className="text-xs text-gray-600 mb-3">
             Are you looking for more features? Check out our Pro version.
           </p>
-          <button className="w-full bg-green-500 text-white py-2 px-3 rounded text-sm font-medium hover:bg-green-600 transition-colors flex items-center justify-center space-x-2">
-            <span>Upgrade Now</span>
+          <button className="w-full text-gray-900 py-2 px-3 rounded-sm text-sm font-medium hover:opacity-80 transition-colors flex items-center justify-center space-x-2 border border-black" style={{ backgroundColor: '#d9f999' }}>
             <ArrowRight className="h-3 w-3" />
+            <span>Upgrade Now</span>
           </button>
         </div>
       </div>

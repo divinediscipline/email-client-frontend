@@ -60,15 +60,15 @@ export const emailsAPI = {
     search?: string;
   }) => api.get('/api/emails', { params }),
   
-  getEmail: (id: number) => api.get(`/api/emails/${id}`),
+  getEmail: (id: string) => api.get(`/api/emails/${id}`),
   
-  markAsRead: (id: number) => api.patch(`/api/emails/${id}/read`),
+  markAsRead: (id: string) => api.patch(`/api/emails/${id}/read`),
   
-  toggleStar: (id: number) => api.patch(`/api/emails/${id}/star`),
+  toggleStar: (id: string) => api.patch(`/api/emails/${id}/star`),
   
-  toggleImportant: (id: number) => api.patch(`/api/emails/${id}/important`),
+  toggleImportant: (id: string) => api.patch(`/api/emails/${id}/important`),
   
-  moveEmail: (id: number, folder: string) =>
+  moveEmail: (id: string, folder: string) =>
     api.patch(`/api/emails/${id}/move`, { folder }),
   
   getEmailCounts: () => api.get('/api/emails/counts'),
@@ -78,13 +78,13 @@ export const emailsAPI = {
   createLabel: (data: { name: string; color: string }) =>
     api.post('/api/emails/labels', data),
   
-  addLabelToEmail: (emailId: number, label: string) =>
+  addLabelToEmail: (emailId: string, label: string) =>
     api.patch(`/api/emails/${emailId}/labels/add`, { label }),
   
-  removeLabelFromEmail: (emailId: number, label: string) =>
+  removeLabelFromEmail: (emailId: string, label: string) =>
     api.patch(`/api/emails/${emailId}/labels/remove`, { label }),
   
-  deleteLabel: (labelId: number) => api.delete(`/api/emails/labels/${labelId}`),
+  deleteLabel: (labelId: string) => api.delete(`/api/emails/labels/${labelId}`),
 };
 
 // Navigation API
@@ -97,11 +97,11 @@ export const navigationAPI = {
 export const notificationsAPI = {
   getNotifications: () => api.get('/api/notifications/notifications'),
   getUnreadNotificationCount: () => api.get('/api/notifications/notifications/unread-count'),
-  markNotificationAsRead: (id: number) => api.patch(`/api/notifications/notifications/${id}/read`),
+  markNotificationAsRead: (id: string) => api.patch(`/api/notifications/notifications/${id}/read`),
   markAllNotificationsAsRead: () => api.patch('/api/notifications/notifications/mark-all-read'),
   getMessages: () => api.get('/api/notifications/messages'),
   getUnreadMessageCount: () => api.get('/api/notifications/messages/unread-count'),
-  markMessageAsRead: (id: number) => api.patch(`/api/notifications/messages/${id}/read`),
+  markMessageAsRead: (id: string) => api.patch(`/api/notifications/messages/${id}/read`),
   markAllMessagesAsRead: () => api.patch('/api/notifications/messages/mark-all-read'),
 };
 

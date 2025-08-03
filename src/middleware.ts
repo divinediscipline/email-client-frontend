@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function middleware(_request: NextRequest) {
   // Since we're using localStorage for auth, let the client handle redirects
   // The middleware will only handle basic routing

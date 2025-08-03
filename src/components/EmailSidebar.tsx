@@ -9,7 +9,7 @@ import {
   FileText, 
   Trash2, 
   Tag, 
-  Plus,
+  Pen,
   User
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -59,10 +59,10 @@ export default function EmailSidebar() {
   ];
 
   return (
-    <aside className="w-80 bg-white h-screen overflow-y-auto">
-      <div className="p-6">
+    <aside className="w-64 bg-white h-screen overflow-y-auto">
+      <div className="p-4">
         {/* User Profile - side by side */}
-        <div className="mb-6 flex items-center space-x-3">
+        <div className="mb-4 flex items-center space-x-3">
           <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
             <User className="h-6 w-6 text-gray-600" />
           </div>
@@ -72,20 +72,20 @@ export default function EmailSidebar() {
           </div>
         </div>
 
-        {/* Compose Button - same size as inbox */}
-        <button className="w-full bg-green-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-600 transition-colors flex items-center justify-center space-x-2 mb-6">
-          <Plus className="h-4 w-4" />
+        {/* Compose Button - custom green with pen icon and black border */}
+        <button className="w-full text-gray-900 py-2 px-4 rounded font-medium hover:opacity-80 transition-colors flex items-center justify-center space-x-2 mb-4 border border-black" style={{ backgroundColor: '#d9f999' }}>
+          <Pen className="h-4 w-4" />
           <span>Compose</span>
         </button>
 
         {/* Email Folders */}
-        <div className="space-y-1 mb-6">
+        <div className="space-y-1 mb-4">
           {emailFolders.map((folder) => (
             <button
               key={folder.name}
-              className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`w-full flex items-center justify-between px-3 py-2 rounded text-sm font-medium transition-colors ${
                 folder.active
-                  ? 'bg-gray-100 text-gray-900'
+                  ? 'bg-white text-black border border-black'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
               }`}
             >
@@ -101,7 +101,7 @@ export default function EmailSidebar() {
         </div>
 
         {/* Labels */}
-        <div className="mb-6">
+        <div className="mb-4">
           <h3 className="text-sm font-medium text-gray-900 mb-3">Labels</h3>
           <div className="space-y-1">
             {labels.length > 0 ? (
