@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { 
   Square, 
+  CheckSquare,
   RefreshCw, 
   ChevronLeft, 
   ChevronRight, 
@@ -283,7 +284,11 @@ export default function EmailList() {
             onClick={handleSelectAll}
             className="p-1 hover:bg-gray-100 rounded"
           >
-            <Square className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" />
+            {selectedEmails.size === emails.length && emails.length > 0 ? (
+              <CheckSquare className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" />
+            ) : (
+              <Square className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" />
+            )}
           </button>
           {/* Refresh icon with circular border */}
           <button
@@ -330,7 +335,11 @@ export default function EmailList() {
                     onClick={() => handleEmailSelect(email.id)}
                     className="p-1 hover:bg-gray-100 rounded"
                   >
-                    <Square className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" />
+                    {selectedEmails.has(email.id) ? (
+                      <CheckSquare className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" />
+                    ) : (
+                      <Square className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" />
+                    )}
                   </button>
                   
                   <button
