@@ -336,6 +336,7 @@ export default function EmailList() {
                   <button
                     onClick={() => handleStarToggle(email.id)}
                     className="p-1 hover:bg-gray-100 rounded relative"
+                    title={`Starred: ${email.isStarred}`}
                   >
                     <Star 
                       className={`h-3 w-3 sm:h-4 sm:w-4 ${
@@ -346,7 +347,6 @@ export default function EmailList() {
                       style={{
                         fill: email.isStarred ? '#ff6900' : 'none'
                       }}
-                      title={`Starred: ${email.isStarred}`}
                     />
                   </button>
                   
