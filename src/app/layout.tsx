@@ -1,29 +1,29 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { AuthProvider } from "@/contexts/AuthContext";
-import ClientOnly from "@/components/ClientOnly";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import { AuthProvider } from '@/contexts/AuthContext';
+import { EmailViewProvider } from '@/contexts/EmailViewContext';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Email Client - Business Dashboard",
-  description: "Modern email client with business dashboard features",
+  title: 'Email Client',
+  description: 'A modern email client built with Next.js',
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={inter.className} suppressHydrationWarning={true}>
-        <ClientOnly>
-          <AuthProvider>
+      <body className={inter.className}>
+        <AuthProvider>
+          <EmailViewProvider>
             {children}
-          </AuthProvider>
-        </ClientOnly>
+          </EmailViewProvider>
+        </AuthProvider>
       </body>
     </html>
   );

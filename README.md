@@ -77,25 +77,44 @@ src/
 
 ## API Integration
 
-The application integrates with the following API endpoints:
+The application integrates with the following API endpoints. **Note**: The API has been updated to use `view` parameters instead of `folder` parameters for email filtering, and the `moveEmail` functionality has been removed.
 
 ### Authentication
 - `POST /api/auth/login` - User login
 - `POST /api/auth/logout` - User logout
 - `GET /api/auth/profile` - Get user profile
+- `PUT /api/auth/profile` - Update user profile
+- `PUT /api/auth/change-password` - Change password
+- `POST /api/auth/register` - Register new user
 
 ### Emails
-- `GET /api/emails` - Get emails with pagination and filtering
-- `GET /api/emails/counts` - Get email counts by folder
+- `GET /api/emails` - Get emails with pagination and filtering (supports view, search, labels parameters)
+- `GET /api/emails/counts` - Get email counts by view
+- `GET /api/emails/:id` - Get specific email
 - `PATCH /api/emails/:id/star` - Toggle email star
 - `PATCH /api/emails/:id/read` - Mark email as read
+- `PATCH /api/emails/:id/important` - Toggle email important
+
+### Labels
+- `GET /api/emails/labels` - Get email labels
+- `POST /api/emails/labels` - Create email label
+- `PATCH /api/emails/:id/labels/add` - Add label to email
+- `PATCH /api/emails/:id/labels/remove` - Remove label from email
+- `DELETE /api/emails/labels/:id` - Delete email label
 
 ### Navigation
 - `GET /api/navigation/items` - Get navigation items
 - `GET /api/navigation/upgrade-info` - Get upgrade information
 
-### Labels
-- `GET /api/emails/labels` - Get email labels
+### Notifications
+- `GET /api/notifications/notifications` - Get notifications
+- `GET /api/notifications/notifications/unread-count` - Get unread notification count
+- `PATCH /api/notifications/notifications/:id/read` - Mark notification as read
+- `PATCH /api/notifications/notifications/mark-all-read` - Mark all notifications as read
+- `GET /api/notifications/messages` - Get messages
+- `GET /api/notifications/messages/unread-count` - Get unread message count
+- `PATCH /api/notifications/messages/:id/read` - Mark message as read
+- `PATCH /api/notifications/messages/mark-all-read` - Mark all messages as read
 
 ## Key Features
 

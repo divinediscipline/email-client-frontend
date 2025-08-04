@@ -16,17 +16,40 @@ api.interceptors.request.use((config) => {
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+  console.log(`=== API REQUEST ===`);
+  console.log(`URL: ${config.url}`);
+  console.log(`Method: ${config.method}`);
+  console.log(`Headers:`, config.headers);
   return config;
 });
 
 // Response interceptor to handle errors
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    console.log(`=== API RESPONSE ===`);
+    console.log(`URL: ${response.config.url}`);
+    console.log(`Status: ${response.status}`);
+    console.log(`Data:`, response.data);
+    return response;
+  },
   (error) => {
+    console.log(`=== API ERROR ===`);
+    console.log(`URL: ${error.config?.url}`);
+    console.log(`Status: ${error.response?.status}`);
+    console.log(`Error:`, error);
+    
+    // Handle different error types
     if (error.response?.status === 401) {
       localStorage.removeItem('authToken');
       window.location.href = '/login';
+    } else if (error.response?.status === 429) {
+      console.warn('Rate limit exceeded. Please wait a moment before trying again.');
+      // Show user-friendly message for rate limiting
+      if (typeof window !== 'undefined') {
+        alert('Too many requests. Please wait a moment and try again.');
+      }
     }
+    
     return Promise.reject(error);
   }
 );
@@ -55,9 +78,9 @@ export const emailsAPI = {
   getEmails: (params?: {
     page?: number;
     limit?: number;
-    folder?: string;
-    isRead?: boolean;
+    view?: string;
     search?: string;
+    labels?: string;
   }) => api.get('/api/emails', { params }),
   
   getEmail: (id: string) => api.get(`/api/emails/${id}`),
@@ -67,9 +90,6 @@ export const emailsAPI = {
   toggleStar: (id: string) => api.patch(`/api/emails/${id}/star`),
   
   toggleImportant: (id: string) => api.patch(`/api/emails/${id}/important`),
-  
-  moveEmail: (id: string, folder: string) =>
-    api.patch(`/api/emails/${id}/move`, { folder }),
   
   getEmailCounts: () => api.get('/api/emails/counts'),
   

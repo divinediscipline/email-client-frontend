@@ -9,20 +9,20 @@ export interface User {
 
 export interface Email {
   id: string;
-  user_id: string;
+  userId: string;
   from: string;
   to: string;
   subject: string;
   body: string;
-  is_read: boolean;
-  is_starred: boolean;
-  is_important: boolean;
+  isRead: boolean;
+  isStarred: boolean;
+  isImportant: boolean;
   folder: string;
   labels: string[];
-  has_attachments: boolean;
+  hasAttachments: boolean;
   timestamp: string;
-  created_at: string;
-  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
   attachments: unknown[];
 }
 
