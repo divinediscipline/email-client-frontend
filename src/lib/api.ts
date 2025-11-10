@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://email-list-api-3.onrender.com';
+const API_BASE_URL = 'https://email-list-api-4.onrender.com'
 
 // Create axios instance with base configuration
 const api = axios.create({
