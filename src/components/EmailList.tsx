@@ -10,7 +10,7 @@ import {
   Star, 
   Paperclip
 } from 'lucide-react';
-import { emailsAPI } from '@/lib/api';
+import { emailsAPI } from '@/lib/api-fetch';
 import { Email, PaginatedResponse } from '@/types';
 import LoadingSpinner from './LoadingSpinner';
 import { useAuth } from '@/contexts/AuthContext';

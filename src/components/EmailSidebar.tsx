@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useEmailView } from '@/contexts/EmailViewContext';
-import { emailsAPI } from '@/lib/api';
+import { emailsAPI } from '@/lib/api-fetch';
 import { EmailCounts, Label } from '@/types';
 
 export default function EmailSidebar() {
