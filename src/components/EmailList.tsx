@@ -76,17 +76,32 @@ export default function EmailList() {
       
       console.log('=== EMAILS RESPONSE ===');
       console.log('Full response:', response.data);
+      console.log('Response type:', typeof response.data);
+      console.log('Response keys:', Object.keys(response.data));
       
       // The API returns { success: true, data: [...], pagination: {...} }
-      const apiResponse = response.data;
-      const emails = apiResponse.data || [];
-      const pagination = apiResponse.pagination || { total: 0 };
+      const apiResponse: any = response.data;
       
-      console.log('Parsed emails:', emails.length);
-      console.log('Total from pagination:', pagination.total);
+      // Extract emails array
+      let emailsArray: Email[] = [];
+      let paginationData = { total: 0, page: 1, limit: 15, totalPages: 0 };
+      
+      if (apiResponse.data && Array.isArray(apiResponse.data)) {
+        emailsArray = apiResponse.data;
+        paginationData = apiResponse.pagination || paginationData;
+        console.log('Using apiResponse.data structure');
+      } else if (Array.isArray(apiResponse)) {
+        // Fallback: response.data is directly the array
+        emailsArray = apiResponse;
+        console.log('Using direct array structure');
+      }
+      
+      console.log('Parsed emails count:', emailsArray.length);
+      console.log('Total from pagination:', paginationData.total);
+      console.log('First email:', emailsArray[0]);
       
       // Log starred status for each email
-      emails.forEach((email: Email, index: number) => {
+      emailsArray.forEach((email: Email, index: number) => {
         console.log(`Email ${index + 1}:`, {
           id: email.id,
           subject: email.subject,
@@ -95,8 +110,8 @@ export default function EmailList() {
         });
       });
       
-      setEmails(emails);
-      setTotalEmails(pagination.total);
+      setEmails(emailsArray);
+      setTotalEmails(paginationData.total);
     } catch (error) {
       console.error('Error fetching emails:', error);
     } finally {
