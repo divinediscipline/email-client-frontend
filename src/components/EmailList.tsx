@@ -74,12 +74,19 @@ export default function EmailList() {
 
       const response = await emailsAPI.getEmails(params);
       
-      const data = response.data as PaginatedResponse<Email>;
       console.log('=== EMAILS RESPONSE ===');
-      console.log('Total emails:', data.data.length);
+      console.log('Full response:', response.data);
+      
+      // The API returns { success: true, data: [...], pagination: {...} }
+      const apiResponse = response.data;
+      const emails = apiResponse.data || [];
+      const pagination = apiResponse.pagination || { total: 0 };
+      
+      console.log('Parsed emails:', emails.length);
+      console.log('Total from pagination:', pagination.total);
       
       // Log starred status for each email
-      data.data.forEach((email, index) => {
+      emails.forEach((email: Email, index: number) => {
         console.log(`Email ${index + 1}:`, {
           id: email.id,
           subject: email.subject,
@@ -88,8 +95,8 @@ export default function EmailList() {
         });
       });
       
-      setEmails(data.data);
-      setTotalEmails(data.pagination.total);
+      setEmails(emails);
+      setTotalEmails(pagination.total);
     } catch (error) {
       console.error('Error fetching emails:', error);
     } finally {

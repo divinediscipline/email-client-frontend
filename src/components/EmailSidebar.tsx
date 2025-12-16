@@ -34,9 +34,11 @@ export default function EmailSidebar() {
         try {
           console.log(`=== FETCHING EMAIL COUNTS ===`);
           const countsResponse = await emailsAPI.getEmailCounts();
-          console.log(`Counts API Response:`, countsResponse);
-          console.log(`Counts data:`, countsResponse.data.data);
-          setEmailCounts(countsResponse.data.data);
+          console.log(`Counts API Response:`, countsResponse.data);
+          // API returns { success: true, data: {...counts...} }
+          const countsData = countsResponse.data.data || countsResponse.data;
+          console.log(`Counts data:`, countsData);
+          setEmailCounts(countsData);
         } catch (error) {
           console.warn('API has no email counts data', error);
           setEmailCounts(null);
@@ -45,7 +47,9 @@ export default function EmailSidebar() {
         // Try to fetch labels
         try {
           const labelsResponse = await emailsAPI.getLabels();
-          setLabels(labelsResponse.data.data);
+          // API returns { success: true, data: [...labels...] }
+          const labelsData = labelsResponse.data.data || labelsResponse.data;
+          setLabels(Array.isArray(labelsData) ? labelsData : []);
         } catch {
           console.warn('API has no labels data');
           setLabels([]);
